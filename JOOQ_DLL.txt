@@ -1,0 +1,54 @@
+
+Introduce JOOQ
+     - It is a framework for bridging the gap between java and the database
+     - We currently use spring / hibernate / JPA for doing this
+     - JOOQ can integrate with all of these
+     - JPA takes an entity focused domain approach to dealing with the database
+            - It abstracts the database so that you only deal with java objects
+            - Pro - Easy to use if you only know java and don't know how databases work and only want to do very simple stuff
+            - Con - A massive pain in the ass if you want to do something complex
+     - Currently we use native queries for doing complicated things
+            - Pro - Can use the full power of the database using raw sql
+            - Con - Uses raw SQL strings that don't promote much code reuse, also, database specific
+     - JOOQ uses statically typed java to construct queries that can be run on the database
+     - This allows you to make use of the full power of your database
+     - It uses java rather than SQL strings, repeated parts of queries can be factored out and reused
+     - By default, it doesn't lend itself to the JPA object model, there is a way you can get that behaviour.
+
+Introduce the project
+    - Aim to show you JOOQ working in Spring Boot alongside spring repositories
+    - The project has 2 main entities, User and Transaction
+    - User is an example of an entity that has nested sub-entities
+    - Transaction is an example of an entity that usually has non-CRUD queries running on it
+    - Show liquibase file
+    - Start database
+    - Run liquibase
+    - JOOQ has a plugin that allows you to generate java classes based on a database
+    - Using this makes using the queries in JOOQ a lot easier
+    - Otherwise you need to rely on hard coded strings in table and column names
+    - Run code generation
+    - Show generated code
+    - Show the User class, with it's sub entities
+    - Show the Transaction class
+    - They are just JPA entities, pretty standard
+    - Start the server
+
+JOOQ and JPA
+     - Use postman to query the /user endpoint
+     - See we get back user's with no sub-entities
+     - What's going on?
+     - Show the getUser() method
+     - Use postman to call the /users endpoint
+     - See we get the sub entities
+     - Show the getUsers() method
+     - Show the jpaQuery() method
+     - The getSQL() method basically allows us to use JOOQ as an sql generator
+     - We can then use that with JPA to get entities
+
+JOOQ and complex queries
+    - Get Transactions - just returns the transactions
+    - Get Total by currency
+    - Get Total by currency - filtered
+    - Both of these use the same underlying query with a set of conditions
+    - Get Cumulative Sum - Shows that window functions work
+    - Get First Transactions - Shows with clauses and window functions work
